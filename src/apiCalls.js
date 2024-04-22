@@ -1,13 +1,13 @@
-// missing post function and error handling
+// missing post/delete functions and error handling
 
 export const getUrls = () => {
   return fetch('http://localhost:3001/api/v1/urls')
-      .then(response => {
-          if (!response.ok) {
-              throw new Error('Failed to fetch URLs.');
-          }
-          return response.json();
-      });
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch URLs.');
+      }
+      return response.json();
+    });
 }
 
 
@@ -19,10 +19,20 @@ export const postUrl = (urlData) => {
     },
     body: JSON.stringify(urlData)
   })
-  .then(response => response.json().then(data => {
-    if (!response.ok) {
+    .then(response => response.json().then(data => {
+      if (!response.ok) {
         throw new Error(data.message || 'Failed to post URL.');
+      }
+      return data;
+    }));
+}
+
+export const deleteUrl = (id) => {
+  return fetch(`http://localhost:3001/api/v1/urls/${id}`, {
+    method: 'DELETE'
+  }).then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to delete URL.');
     }
-    return data;
-  }));
+  });
 }

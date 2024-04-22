@@ -29,7 +29,7 @@ function App () {
         <UrlForm setUrls={setUrls}/> 
       </header>
       {error && <p className="error">{error}</p>}
-      <UrlContainer urls={urls}/>
+      <UrlContainer urls={urls} setUrls={setUrls}/>
     </main>
   );
 }
